@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<title>Javascript Lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<header>
+<div id="start-wrapper">
+  <button id="startButton" class="button">START</button>
+</header>
+</div>
+
+<br></br>
+
+<div id="game-wrapper">
+<section>
+  <button id="attackButton" class="attack">ATTACK</button>
+  <button id="healButton" class="heal">HEAL</button>
+  <button id="quitButton" class="quit">QUIT</button>
+</section>
+
+<p id="text">
+</p>
+<div id="bars">
+
+Player Stats
+<div class="Player">
+
+<div class="name"> Name</div>
+
+  <h4>Health Heal-Count Wins</h4>
+
+  <progress class="playerHealth" value="0" max="40">
+
+  </progress>
+
+
+  <progress class="HealCount" value="0" max="2">
+
+  </progress>
+
+  <progress class="playerWins" value="0" max="5">
+
+  </progress>
+
+</div>
+
+<div id = playerName> </div>
+
+<div class="Enemy">
+  Enemy Stats
+<div class="enemy">Name</div>
+<div class="enemylife">Health</div>
+
+  <progress class="enemyHealth" value="0" max="10">
+
+  <div class="grant">Grant</div>
+</div>
+
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
