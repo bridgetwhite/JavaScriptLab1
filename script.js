@@ -93,10 +93,9 @@ var userHealth = 40;
 var grantHealth = 10;
 var wins = 0;
 var playerHealCount = 2;
+var user;
 
-
-
-// Hook up the start button
+// Hook up the start button - could use an 'add event listener'
 var startButton = document.getElementById("startButton");
 startButton.onclick = function () {
   document.getElementById("game-wrapper").style.display = "block";
@@ -118,7 +117,7 @@ function attack() {
   userHealth -= getDamage(5);
   grantHealth -= getDamage(3);
 
-  document.getElementById("text").innerText= `The user has ${userHealth} health remaining. Grant has ${grantHealth} health remaining.`;
+  document.getElementById("text").innerText= `${user} has ${userHealth} health remaining. Grant has ${grantHealth} health remaining.`;
 
   // console.log(`The user has ${userHealth} health remaining`);
   // console.log(`Grant has ${grantHealth} health remaining`);
@@ -129,30 +128,37 @@ function attack() {
   var enemyHealthProgressBar = document.getElementsByClassName("enemyHealth") [0];
   enemyHealthProgressBar.value = grantHealth;
 
-  var playerWinsProgressBar = document.getElementsByClassName("playerWins") [0];
-  playerWinsProgressBar.value = wins;
+// Hook up Wins
 
   if (grantHealth <= 0) {
     wins++;
     grantHealth = 10;
-    var message = `The user has a victory`
-    document.getElementById("text").innerText=`The user has 1 victory`;
+
+    var playerWinsProgressBar = document.getElementsByClassName("playerWins") [0];
+    playerWinsProgressBar.value = wins;
+
+    // var message = `The user has a victory`
+    // document.getElementById("text").innerText=`${user} has a victory`;
     if (wins > 1) {
-    var message = `The user has another victory`
-    document.getElementById("text").innerText=`The user has 1 victory`;
+    // var message = `The user has another victory`
+    document.getElementById("text").innerText=`${user} has another victory`;
 
-    if (wins === 5){
+  }if (wins === 5){
       console.log(`The user has ${wins} wins`);
-      document.getElementById("text").innerText=`The user has ${wins} wins`;
-
+      document.getElementById("text").innerText=`${user} has ${wins} wins`;
+      quit('user wins');
+  }
     }else if (userHealth <=0 ){
       document.getElementById("text").innerText='Grant Wins';
       console.log('Grant Wins');
+      quit('Grant Wins');
     };
 
-    }
+
   }
-}
+
+
+// Hook up heal
 var healButton = document.getElementById("healButton");
 healButton.onclick = heal;
 
@@ -161,7 +167,7 @@ healButton.onclick = heal;
     userHealth += getRandom(10);
     playerHealCount --;
 
-    document.getElementById("text").innerText=`The user has healed and has ${userHealth} health.`;
+    document.getElementById("text").innerText=`${user} has healed and has ${userHealth} health.`;
     // console.log(`The user has healed and has ${userHealth}`);
 
     var playerHealCountProgressBar = document.getElementsByClassName('HealCount') [0];
@@ -171,15 +177,17 @@ healButton.onclick = heal;
 
   // Quit button
   var quitButton = document.getElementById("quitButton");
-  quitButton.onclick = quit;
-  function quit(){
-   alert("You have quit the game. Thanks for playing!  Happy Gaming :)");
+  quitButton.onclick = function(){
+    quit("You have quit the game. Thanks for playing!  Happy Gaming :)");
+  }
+  function quit(message){
+   alert(message);
    document.getElementById("game-wrapper").style.display = "none";
    document.getElementById("start-wrapper").style.display = "block";
   }
 
 function startGame() {
-  var user = prompt('Please enter your name');
+  user = prompt('Please enter your name');
   setPlayerName(user);
   // startCombat(user);
 }
